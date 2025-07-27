@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RecordNotFoundException.class)
     public static ResponseEntity<?> generateRecordNotFoundExceptionResponse(RecordNotFoundException ex) {
-        ExceptionHandlerResponse exceptionHandler = new ExceptionHandlerResponse(ex.getSuc(), ex.getMessage(), ex.getMessage());
+        ExceptionHandlerResponse exceptionHandler = new ExceptionHandlerResponse(ex.getIsSuccess(), ex.getMessage(), ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionHandler);
     }

@@ -70,9 +70,9 @@ public class UserInfoController {
             return ApiCallResponse.generateResponse(0, "خطأ في كلمة السر او كلمة المرور", "The username or password is not correct", HttpStatus.OK, null);
     }
 
-    @GetMapping("/getUserByIdentifier")
-    public ResponseEntity<?> getUserByIdentifier(@RequestParam("identifier") String identifier) {
-        List<UserInfoDto> userInfoResponse = service.findUser(identifier);
+    @GetMapping("/getUserById")
+    public ResponseEntity<?> getUserByIdentifier(@RequestParam("id") String id) {
+        List<UserInfoDto> userInfoResponse = service.findUser(id);
 
         if (userInfoResponse != null) {
             return ApiCallResponse.generateResponse(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse);
@@ -82,8 +82,8 @@ public class UserInfoController {
     }
 
     @GetMapping("/userIsActive")
-    public ResponseEntity<?> getIsActiveUserByIdentifier(@RequestParam("identifier") String identifier) {
-        List<UserInfoDto> userInfoResponse = service.findUser(identifier);
+    public ResponseEntity<?> getIsActiveUserByIdentifier(@RequestParam("id") String id) {
+        List<UserInfoDto> userInfoResponse = service.findUser(id);
 
         if (!userInfoResponse.isEmpty()) {
             if (userInfoResponse.get(0).is_active() == 1)
@@ -97,8 +97,8 @@ public class UserInfoController {
     }
 
     @GetMapping("/userIsConfirmed")
-    public ResponseEntity<?> getIsConfirmedUserByIdentifier(@RequestParam("identifier") String identifier) {
-        List<UserInfoDto> userInfoResponse = service.findUser(identifier);
+    public ResponseEntity<?> getIsConfirmedUserByIdentifier(@RequestParam("id") String id) {
+        List<UserInfoDto> userInfoResponse = service.findUser(id);
 
         if (!userInfoResponse.isEmpty()) {
             if (userInfoResponse.get(0).is_user_confirmed() == 1)

@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.controller;
+package com.eleccars.ElecCarsApp.controller.securityControllers;
 
 
 import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;

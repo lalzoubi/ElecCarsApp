@@ -4,6 +4,7 @@ package com.eleccars.ElecCarsApp.controller.securityControllers;
 import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;
 import com.eleccars.ElecCarsApp.javautils.JavaSpringUtils;
 import com.eleccars.ElecCarsApp.javautils.RequestUtils;
+import com.eleccars.ElecCarsApp.mapper.securityMappers.UserInfoMapper;
 import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
 import com.eleccars.ElecCarsApp.model.securityModels.UserLoginHistory;
 import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
@@ -15,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -29,6 +30,9 @@ public class UserInfoController {
     UserLoginHistoryService userLoginHistoryService;
 
     @Autowired
+    UserInfoMapper userInfoMapper;
+
+    @Autowired
     private JavaSpringUtils JavaSpringUtils;
 
     @Autowired
@@ -36,19 +40,22 @@ public class UserInfoController {
 
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody UserInfo user) {
-        List<UserInfoDto> secSystemUserResponse = service.fetchUserDetails(user.getUsername());
-        if (secSystemUserResponse.isEmpty()) {
-            service.registerUser(user);
-            return ApiCallResponse.generateResponse(0, "تم تسجيل المستخدم بنجاح", "The user registered  successfully", HttpStatus.OK, user);
+
+        Optional<UserInfo> info = service.findUser(user.getUsername());
+        if (info.isPresent()) {
+            return ApiCallResponse.generateResponse(0, "اسم المستخدم مسجل مسبقاً", "The user already registered", HttpStatus.OK, null);
         }
-        return ApiCallResponse.generateResponse(0, "اسم المستخدم مسجل مسبقاً", "The user already registered", HttpStatus.OK, null);
+
+        service.registerUser(user);
+        user.setPassword(null);
+        return ApiCallResponse.generateResponse(0, "تم تسجيل المستخدم بنجاح", "The user registered  successfully", HttpStatus.OK, null);
     }
 
     @GetMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         int verifyUserResponse = service.verifyUser(username, password);
         if (verifyUserResponse == 1) {
-            List<UserInfoDto> userInfoResponse = service.fetchUserDetails(username);
+            UserInfoDto userInfoResponse = service.fetchUserDetails(username);
             if (userInfoResponse != null) {
 
                 // insert into history table
@@ -59,7 +66,7 @@ public class UserInfoController {
                 history.setDevice_type(RequestUtils.getDeviceDetails(request));
                 history.setDevice_info(RequestUtils.getUserAgent(request));
                 UserInfo user = new UserInfo();
-                user.setId(userInfoResponse.get(0).id()); // set the foreign key
+                user.setId(userInfoResponse.getId()); // set the foreign key
                 history.setUser_history(user);
                 userLoginHistoryService.saveUserLoginHistory(history);
 
@@ -72,36 +79,38 @@ public class UserInfoController {
 
     @GetMapping("/getUserById")
     public ResponseEntity<?> getUserByIdentifier(@RequestParam("id") String id) {
-        List<UserInfoDto> userInfoResponse = service.findUser(id);
-
-        if (userInfoResponse != null) {
+        Optional<UserInfo> info = service.findUser(id);
+        if (info.isPresent()) {
+            UserInfoDto userInfoResponse = userInfoMapper.toDto(info.get());
             return ApiCallResponse.generateResponse(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse);
-
-        } else
-            return ApiCallResponse.generateResponse(0, "المستخدم غير موجود", "User not found", HttpStatus.OK, null);
+        }
+        return ApiCallResponse.generateResponse(0, "المستخدم غير موجود", "User not found", HttpStatus.OK, null);
     }
 
     @GetMapping("/userIsActive")
-    public ResponseEntity<?> getIsActiveUserByIdentifier(@RequestParam("id") String id) {
-        List<UserInfoDto> userInfoResponse = service.findUser(id);
+    public ResponseEntity<?> getIsActiveUser(@RequestParam("username") String username) {
 
-        if (!userInfoResponse.isEmpty()) {
-            if (userInfoResponse.get(0).is_active() == 1)
+        Optional<UserInfo> info = service.findUser(username);
+
+        if (info.isPresent()) {
+            UserInfo userInfoResponse = service.findByIsActiveTrue(username);
+            if (userInfoResponse != null)
                 return ApiCallResponse.generateResponse(1, "المستخدم  مفعل", "User is active", HttpStatus.OK, null);
             else
                 return ApiCallResponse.generateResponse(0, "المستخدم غير مفعل", "User is inactive", HttpStatus.OK, null);
-        } else
-            return ApiCallResponse.generateResponse(0, "المستخدم غير موجود", "User not found", HttpStatus.OK, null);
-
+        }
+        return ApiCallResponse.generateResponse(0, "المستخدم غير موجود", "User not found", HttpStatus.OK, null);
 
     }
 
     @GetMapping("/userIsConfirmed")
-    public ResponseEntity<?> getIsConfirmedUserByIdentifier(@RequestParam("id") String id) {
-        List<UserInfoDto> userInfoResponse = service.findUser(id);
+    public ResponseEntity<?> getIsConfirmedUserByIdentifier(@RequestParam("username") String username) {
 
-        if (!userInfoResponse.isEmpty()) {
-            if (userInfoResponse.get(0).is_user_confirmed() == 1)
+        Optional<UserInfo> info = service.findUser(username);
+
+        if (info.isPresent()) {
+            UserInfo userInfoResponse = service.findByIsUserConfirmedTrue(username);
+            if (userInfoResponse != null)
                 return ApiCallResponse.generateResponse(1, "المستخدم موثق", "User is confirmed", HttpStatus.OK, null);
             else
                 return ApiCallResponse.generateResponse(0, "المستخدم غير موثق", "User is confirmed", HttpStatus.OK, null);

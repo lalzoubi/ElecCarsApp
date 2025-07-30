@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 
@@ -24,8 +25,10 @@ public class UserInfo extends BaseEntity<Long> {
     private String email;
     private String first_name;
     private String last_name;
-    private Integer is_user_confirmed;
-    private Integer is_active;
+    @Column(name = "is_user_confirmed")
+    private Boolean userConfirmed;
+    @Column(name = "is_user_active")
+    private Boolean userActive;
     private String deletedBy;
     private String deletedDate;
 
@@ -40,4 +43,7 @@ public class UserInfo extends BaseEntity<Long> {
 
     @OneToMany(mappedBy = "user_history")
     private List<UserLoginHistory> userLoginHistoryList;
+
+
+
 }

@@ -1,19 +1,26 @@
 package com.eleccars.ElecCarsApp.dto.securityDTOs;
 
-public record UserInfoDto(
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-        long id,
-        String username,
-        String email,
-        String first_name,
-        String last_name,
-        Integer is_user_confirmed,
-        Integer is_active,
-        String deletedBy,
-        String deletedDate,
-        long stationIdRef,
-        long roleIdRef
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class UserInfoDto{
 
-) {
+    private long id;
+    private String username;
+    private String email;
+    private String first_name;
+    private String last_name;
+    private Boolean userConfirmed;
+    private Boolean userActive;
+    private String deletedBy;
+    private String deletedDate;
+    private long stationIdRef;
+    private long roleIdRef;
 
 }

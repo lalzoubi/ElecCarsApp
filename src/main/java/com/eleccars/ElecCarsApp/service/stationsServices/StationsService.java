@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +19,8 @@ public class StationsService {
     @Autowired
     StationsRepository stationsRepository;
 
-    StationsMapper stationsMapper = new StationsMapper();
+    @Autowired
+    StationsMapper stationsMapper;
 
     @Transactional
     public void saveStationDetails(StationInfo stationInfo) {
@@ -26,15 +28,18 @@ public class StationsService {
     }
 
     @Transactional(readOnly = true)
-    public List<StationsInfoDto> findStationById(Long id) {
-        return stationsRepository.findById(id).stream().map(stationsMapper).collect(Collectors.toList());
+    public StationsInfoDto findStationById(Long id) {
+        Optional <StationInfo> info = stationsRepository.findById(id);
+        return stationsMapper.toDto(info.get());
+
+        //return stationsRepository.findById(id).stream().map(stationsMapper).collect(Collectors.toList());
     }
 
     @Transactional
     public void deleteStationById(Long id) {
         StationInfo station = stationsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Station not found"));
-        station.setIs_active(0);
+        station.setStationActive(false);
         stationsRepository.save(station);
     }
 
@@ -42,7 +47,7 @@ public class StationsService {
     public void reactiveStationById(Long id) {
         StationInfo station = stationsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Station not found"));
-        station.setIs_active(1);
+        station.setStationActive(true);
         stationsRepository.save(station);
     }
 }

@@ -47,8 +47,8 @@ public class StationsController {
 
     @GetMapping("/getStationById")
     public ResponseEntity<?> registerStation (@RequestParam ("stationId") Long stationId){
-        List<StationsInfoDto> stationInfoResponse = stationsService.findStationById(stationId);
-        if (!stationInfoResponse.isEmpty())
+        StationsInfoDto stationInfoResponse = stationsService.findStationById(stationId);
+        if (stationInfoResponse != null)
             return ApiCallResponse.generateResponse(1, "تم استرجاع البيانات بنجاح", "The Data retrieved successfully", HttpStatus.OK, stationInfoResponse);
         else
             return ApiCallResponse.generateResponse(0, "المحطة غير موجودة", "Station not found", HttpStatus.OK, stationInfoResponse);

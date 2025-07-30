@@ -2,26 +2,25 @@ package com.eleccars.ElecCarsApp.mapper.securityMappers;
 
 import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;
 import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
-import java.util.function.Function;
+@Mapper(componentModel = "spring")
+public interface UserInfoMapper {
 
-public class UserInfoMapper implements Function<UserInfo, UserInfoDto> {
+    @Mappings({
+            @Mapping(source = "stationIdRef", target = "users_station.id"),
+            @Mapping(source = "roleIdRef", target = "user_roles.id"),
+            @Mapping(source = "userActive", target = "userActive"),
+            @Mapping(source = "userConfirmed", target = "userConfirmed")})
+    UserInfo toEntity(UserInfoDto dto);
 
-    @Override
-    public UserInfoDto apply(UserInfo userInfo) {
-
-        return new UserInfoDto(userInfo.getId(),
-                userInfo.getUsername(),
-                userInfo.getEmail(),
-                userInfo.getFirst_name(),
-                userInfo.getLast_name(),
-                userInfo.getIs_user_confirmed(),
-                userInfo.getIs_active(),
-                userInfo.getDeletedBy(),
-                userInfo.getDeletedDate(),
-                userInfo.getUsers_station().getId(),
-                userInfo.getUser_roles().getId()
-        );
-    }
+    @Mappings({
+            @Mapping(source = "users_station.id", target = "stationIdRef"),
+            @Mapping(source = "user_roles.id", target = "roleIdRef"),
+            @Mapping(source = "userActive", target = "userActive"),
+            @Mapping(source = "userConfirmed", target = "userConfirmed")})
+    UserInfoDto toDto(UserInfo entity);
 
 }

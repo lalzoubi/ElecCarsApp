@@ -14,8 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class UserInfoService {
@@ -26,7 +25,8 @@ public class UserInfoService {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    UserInfoMapper userInfoMapper = new UserInfoMapper();
+    @Autowired
+    UserInfoMapper userInfoMapper;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -51,19 +51,33 @@ public class UserInfoService {
     }
 
     @Transactional(readOnly = true)
-    public List<UserInfoDto> fetchUserDetails(String username) {
-        List<UserInfoDto> user = repo.fetchUserDetails(username).stream().map(userInfoMapper).collect(Collectors.toList());
-        if (user != null)
-            return user;
-        else
+    public UserInfoDto fetchUserDetails(String username) {
+        Optional<UserInfo> info = repo.findByUsername(username);
+        if (info.isPresent()) {
+            return userInfoMapper.toDto(info.get());
+        } else
             throw new UserNotFoundException(0, "خطأ في اسم المستخدم او كلمة المرور", "The username or password is not correct");
     }
 
     @Transactional(readOnly = true)
-    public List<UserInfoDto> findUser(String identifier) {
+    public UserInfo findByIsActiveTrue(String username) {
+        Optional<UserInfo> info = repo.findByUsernameAndUserActiveTrue(username);
+
+        return info.orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public UserInfo findByIsUserConfirmedTrue(String username) {
+        Optional<UserInfo> info = repo.findByUsernameAndUserConfirmedTrue(username);
+
+        return info.orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<UserInfo> findUser(String identifier) {
         // إذا كان query رقم، اعتبره ID
         if (identifier.matches("\\d+")) {
-            return repo.findById(Long.parseLong(identifier)).stream().map(userInfoMapper).collect(Collectors.toList());
+            return repo.findById(Long.parseLong(identifier));
         }
 
         // إذا يحتوي @، اعتبره Email

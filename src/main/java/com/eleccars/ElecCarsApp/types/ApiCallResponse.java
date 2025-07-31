@@ -20,4 +20,16 @@ public class ApiCallResponse {
 
         return new ResponseEntity<Object>(map, status);
     }
+
+    public static ResponseEntity<Object> generateResponseWithToken(int suc, String message_ar, String message_en , HttpStatus status, Object responseObj, String jwtToken) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("isSuccess", suc);
+        map.put("message_ar", message_ar);
+        map.put("message_en", message_en);
+        map.put("status", status.value());
+        map.put("data", responseObj);
+        map.put("token", jwtToken);
+
+        return new ResponseEntity<Object>(map, status);
+    }
 }

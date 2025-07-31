@@ -28,6 +28,9 @@ public class UserInfoService {
     @Autowired
     UserInfoMapper userInfoMapper;
 
+    @Autowired
+    JWTService jwtService;
+
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Transactional
@@ -36,18 +39,18 @@ public class UserInfoService {
         repo.save(user);
     }
 
-    public int verifyUser(String username, String password) {
+    public String verifyUser(String username, String password) {
         try {
 
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             if (authentication.isAuthenticated())
-                return 1;
+                return jwtService.generateToken(username);
 
         } catch (BadCredentialsException e) {
-            return 0;
+            return null;
         }
-        return 0;
+        return null;
     }
 
     @Transactional(readOnly = true)

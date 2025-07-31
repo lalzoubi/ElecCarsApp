@@ -21,13 +21,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
         UserInfo user = repo.getByUsernameForLogin(username);
 
-        if (user == null){
-            user = new UserInfo();
-            user.setUsername(username);
-            user.setPassword("-1");
-            new UserPrincipal(user);
-        }
-
         return new UserPrincipal(user);
     }
 

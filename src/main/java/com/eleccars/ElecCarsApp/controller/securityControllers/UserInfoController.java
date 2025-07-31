@@ -53,11 +53,10 @@ public class UserInfoController {
 
     @GetMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestParam("username") String username, @RequestParam("password") String password) {
-        int verifyUserResponse = service.verifyUser(username, password);
-        if (verifyUserResponse == 1) {
+        String verifyUserResponse = service.verifyUser(username, password);
+        if (verifyUserResponse != null) {
             UserInfoDto userInfoResponse = service.fetchUserDetails(username);
             if (userInfoResponse != null) {
-
                 // insert into history table
                 UserLoginHistory history = new UserLoginHistory();
                 history.setLogin_time(JavaSpringUtils.getCurrentDate());
@@ -70,7 +69,7 @@ public class UserInfoController {
                 history.setUser_history(user);
                 userLoginHistoryService.saveUserLoginHistory(history);
 
-                return ApiCallResponse.generateResponse(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse);
+                return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);
             } else
                 return ApiCallResponse.generateResponse(0, "خطأ في كلمة السر او كلمة المرور", "The username or password is not correct", HttpStatus.OK, null);
         } else

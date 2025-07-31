@@ -33,10 +33,10 @@ public class UserInfoController {
     UserInfoMapper userInfoMapper;
 
     @Autowired
-    private JavaSpringUtils JavaSpringUtils;
+    JavaSpringUtils JavaSpringUtils;
 
     @Autowired
-    private HttpServletRequest request;
+    HttpServletRequest request;
 
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody UserInfo user) {

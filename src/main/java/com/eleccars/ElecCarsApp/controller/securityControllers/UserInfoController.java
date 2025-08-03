@@ -67,6 +67,7 @@ public class UserInfoController {
                 UserInfo user = new UserInfo();
                 user.setId(userInfoResponse.getId()); // set the foreign key
                 history.setUser_history(user);
+                history.setJwt_token_ref(verifyUserResponse);
                 userLoginHistoryService.saveUserLoginHistory(history);
 
                 return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);

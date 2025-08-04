@@ -6,13 +6,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,13 +37,20 @@ public class UserInfo extends BaseEntity<Long> {
     @JoinColumn(name = "stationIdRef")
     private StationInfo users_station;
 
-    @ManyToOne()
+   /* @ManyToOne()
     @JoinColumn(name = "roleIdRef")
-    private UserRoles user_roles;
+    private UserRoles user_roles;*/
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles", // اسم الجدول الوسيط
+            joinColumns = @JoinColumn(name = "user_id"), // اسم العمود من جهة الطالب
+            inverseJoinColumns = @JoinColumn(name = "role_id") // من جهة الكورس
+    )
+    private List<UserRoles> user_roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_history")
     private List<UserLoginHistory> userLoginHistoryList;
-
 
 
 }

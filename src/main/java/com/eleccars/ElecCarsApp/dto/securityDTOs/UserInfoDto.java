@@ -1,15 +1,18 @@
 package com.eleccars.ElecCarsApp.dto.securityDTOs;
 
+import com.eleccars.ElecCarsApp.model.securityModels.UserRoles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserInfoDto{
+public class UserInfoDto {
 
     private long id;
     private String username;
@@ -21,6 +24,7 @@ public class UserInfoDto{
     private String deletedBy;
     private String deletedDate;
     private long stationIdRef;
-    private long roleIdRef;
+    //    private long roleIdRef;
+    private List<UserRoles> user_roles;
 
 }

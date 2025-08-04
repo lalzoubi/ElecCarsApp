@@ -16,4 +16,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionHandler);
     }
 
+    @ExceptionHandler(JwtNotFoundException.class)
+    public static ResponseEntity<?> generateJwtNotFoundExceptionResponse(JwtNotFoundException ex) {
+        ExceptionHandlerResponse exceptionHandler = new ExceptionHandlerResponse(ex.getIsSuccess(), ex.getMessage(), ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionHandler);
+    }
+
 }

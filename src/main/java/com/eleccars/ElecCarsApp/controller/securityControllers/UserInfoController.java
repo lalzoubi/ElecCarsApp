@@ -69,7 +69,6 @@ public class UserInfoController {
                 history.setUser_history(user);
                 history.setJwt_token_ref(verifyUserResponse);
                 userLoginHistoryService.saveUserLoginHistory(history);
-
                 return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);
             } else
                 return ApiCallResponse.generateResponse(0, "خطأ في كلمة السر او كلمة المرور", "The username or password is not correct", HttpStatus.OK, null);

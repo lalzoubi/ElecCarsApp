@@ -62,11 +62,11 @@ public class JWTService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getKay())
-                .build().
-                parseSignedClaims(token).
-                getPayload();
+            return Jwts.parser()
+                    .verifyWith(getKay())
+                    .build().
+                    parseSignedClaims(token).
+                    getPayload();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {

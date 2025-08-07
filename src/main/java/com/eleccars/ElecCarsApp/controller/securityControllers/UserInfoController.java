@@ -11,6 +11,7 @@ import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
 import com.eleccars.ElecCarsApp.service.securityServices.UserLoginHistoryService;
 import com.eleccars.ElecCarsApp.types.ApiCallResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class UserInfoController {
     HttpServletRequest request;
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody UserInfo user) {
+    public ResponseEntity<Object> registerUser(@RequestBody @Valid UserInfo user) {
 
         Optional<UserInfo> info = service.findUser(user.getUsername());
         if (info.isPresent()) {

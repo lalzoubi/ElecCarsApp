@@ -16,6 +16,7 @@ public interface UserInfoRepository  extends JpaRepository<UserInfo, Long> {
     @Query("SELECT users FROM UserInfo users where users.username = :username")
     UserInfo fetchUserDetails(@Param("username")  String username);
 
+    // JPQL
     @Query("SELECT sec FROM UserInfo sec where sec.username = :username")
     UserInfo getByUsernameForLogin(@Param("username") String username);
 

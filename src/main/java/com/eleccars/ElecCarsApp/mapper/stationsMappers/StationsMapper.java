@@ -5,6 +5,7 @@ import com.eleccars.ElecCarsApp.model.stationsModels.StationInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
 public interface StationsMapper {
@@ -16,4 +17,10 @@ public interface StationsMapper {
     @Mappings({
             @Mapping(source = "country.id", target = "countryIdRef")})
     StationsInfoDto toDto(StationInfo entity);
+
+    @Mappings({
+            @Mapping(source = "country.id", target = "countryIdRef")})
+    default Page<StationsInfoDto> toPageDto(Page<StationInfo> stationsPage) {
+        return stationsPage.map(this::toDto);
+    }
 }

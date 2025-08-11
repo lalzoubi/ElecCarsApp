@@ -6,6 +6,10 @@ import com.eleccars.ElecCarsApp.mapper.stationsMappers.StationsMapper;
 import com.eleccars.ElecCarsApp.model.stationsModels.StationInfo;
 import com.eleccars.ElecCarsApp.repository.stationsRepositories.StationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +37,14 @@ public class StationsService {
         return stationsMapper.toDto(info.get());
 
         //return stationsRepository.findById(id).stream().map(stationsMapper).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<StationsInfoDto> getAllStations(int pageNum, int pageSize, String sortCol, Boolean isAsc) {
+
+        Pageable pageable = PageRequest.of(pageNum,pageSize, Sort.by(isAsc ? Sort.Direction.ASC : Sort.Direction.DESC, sortCol));
+        Page<StationInfo> info = stationsRepository.findAllStations(pageable);
+        return stationsMapper.toPageDto(info);
     }
 
     @Transactional

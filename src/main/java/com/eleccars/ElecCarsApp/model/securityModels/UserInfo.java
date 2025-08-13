@@ -51,10 +51,6 @@ public class UserInfo extends BaseEntity<Long> {
     @JoinColumn(name = "stationIdRef")
     private StationInfo users_station;
 
-   /* @ManyToOne()
-    @JoinColumn(name = "roleIdRef")
-    private UserRoles user_roles;*/
-
     @ManyToMany
     @JoinTable(
             name = "users_roles", // اسم الجدول الوسيط

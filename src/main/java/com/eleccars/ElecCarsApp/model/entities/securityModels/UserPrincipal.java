@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.model.securityModels;
+package com.eleccars.ElecCarsApp.model.entities.securityModels;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

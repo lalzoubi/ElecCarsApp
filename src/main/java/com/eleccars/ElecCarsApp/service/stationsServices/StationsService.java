@@ -1,9 +1,9 @@
 package com.eleccars.ElecCarsApp.service.stationsServices;
 
 
-import com.eleccars.ElecCarsApp.dto.stationsDTOs.StationsInfoDto;
-import com.eleccars.ElecCarsApp.mapper.stationsMappers.StationsMapper;
-import com.eleccars.ElecCarsApp.model.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.dto.stationsDTOs.StationsInfoDto;
+import com.eleccars.ElecCarsApp.model.mapper.stationsMappers.StationsMapper;
+import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
 import com.eleccars.ElecCarsApp.repository.stationsRepositories.StationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class StationsService {

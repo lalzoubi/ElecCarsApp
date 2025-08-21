@@ -1,17 +1,15 @@
 package com.eleccars.ElecCarsApp.controller.stationsControllers;
 
 
-import com.eleccars.ElecCarsApp.dto.stationsDTOs.StationsInfoDto;
-import com.eleccars.ElecCarsApp.model.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.dto.stationsDTOs.StationsInfoDto;
+import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
 import com.eleccars.ElecCarsApp.service.stationsServices.StationsService;
-import com.eleccars.ElecCarsApp.types.ApiCallResponse;
+import com.eleccars.ElecCarsApp.javautils.ApiCallResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin

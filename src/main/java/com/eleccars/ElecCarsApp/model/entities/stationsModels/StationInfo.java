@@ -1,18 +1,13 @@
-package com.eleccars.ElecCarsApp.model.stationsModels;
+package com.eleccars.ElecCarsApp.model.entities.stationsModels;
 
-import com.eleccars.ElecCarsApp.base.BaseEntity;
-import com.eleccars.ElecCarsApp.model.commonModels.GeneralLookupsDtl;
-import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.base.BaseEntity;
+import com.eleccars.ElecCarsApp.model.entities.commonModels.GeneralLookupsDtl;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 

@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.base;
+package com.eleccars.ElecCarsApp.model.base;
 
 
 import jakarta.persistence.Column;

@@ -1,9 +1,9 @@
 package com.eleccars.ElecCarsApp.service.securityServices;
 
-import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;
+import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
 import com.eleccars.ElecCarsApp.exceptionHandler.UserNotFoundException;
-import com.eleccars.ElecCarsApp.mapper.securityMappers.UserInfoMapper;
-import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.mapper.securityMappers.UserInfoMapper;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

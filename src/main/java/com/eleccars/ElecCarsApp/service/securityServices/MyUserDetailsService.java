@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.service.securityServices;
 
-import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
-import com.eleccars.ElecCarsApp.model.securityModels.UserPrincipal;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserPrincipal;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

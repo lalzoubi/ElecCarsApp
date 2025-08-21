@@ -1,15 +1,15 @@
 package com.eleccars.ElecCarsApp.controller.securityControllers;
 
 
-import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;
+import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
 import com.eleccars.ElecCarsApp.javautils.JavaSpringUtils;
 import com.eleccars.ElecCarsApp.javautils.RequestUtils;
-import com.eleccars.ElecCarsApp.mapper.securityMappers.UserInfoMapper;
-import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
-import com.eleccars.ElecCarsApp.model.securityModels.UserLoginHistory;
+import com.eleccars.ElecCarsApp.model.mapper.securityMappers.UserInfoMapper;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserLoginHistory;
 import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
 import com.eleccars.ElecCarsApp.service.securityServices.UserLoginHistoryService;
-import com.eleccars.ElecCarsApp.types.ApiCallResponse;
+import com.eleccars.ElecCarsApp.javautils.ApiCallResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

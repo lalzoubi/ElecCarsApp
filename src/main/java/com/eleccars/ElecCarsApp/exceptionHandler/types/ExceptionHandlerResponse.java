@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.types;
+package com.eleccars.ElecCarsApp.exceptionHandler.types;
 
 import lombok.*;
 

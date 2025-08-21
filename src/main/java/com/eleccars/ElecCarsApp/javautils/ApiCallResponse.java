@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.types;
+package com.eleccars.ElecCarsApp.javautils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

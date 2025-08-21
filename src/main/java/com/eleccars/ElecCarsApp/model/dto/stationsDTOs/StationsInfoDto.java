@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.dto.stationsDTOs;
+package com.eleccars.ElecCarsApp.model.dto.stationsDTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

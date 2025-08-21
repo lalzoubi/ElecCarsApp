@@ -1,14 +1,10 @@
-package com.eleccars.ElecCarsApp.mapper.securityMappers;
+package com.eleccars.ElecCarsApp.model.mapper.securityMappers;
 
-import com.eleccars.ElecCarsApp.dto.securityDTOs.UserInfoDto;
-import com.eleccars.ElecCarsApp.model.securityModels.UserInfo;
-import com.eleccars.ElecCarsApp.model.securityModels.UserRoles;
+import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface UserInfoMapper {

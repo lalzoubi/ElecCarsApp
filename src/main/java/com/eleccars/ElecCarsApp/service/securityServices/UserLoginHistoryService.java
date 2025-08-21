@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.service.securityServices;
 
 
-import com.eleccars.ElecCarsApp.model.securityModels.UserLoginHistory;
+import com.eleccars.ElecCarsApp.model.entities.securityModels.UserLoginHistory;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserLoginHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

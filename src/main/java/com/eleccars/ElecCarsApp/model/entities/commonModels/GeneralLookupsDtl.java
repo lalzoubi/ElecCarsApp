@@ -1,5 +1,6 @@
-package com.eleccars.ElecCarsApp.model.commonModels;
+package com.eleccars.ElecCarsApp.model.entities.commonModels;
 
+import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GeneralLookups {
-
+public class GeneralLookupsDtl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,9 +21,11 @@ public class GeneralLookups {
     private String lookup_name_en;
     private String lookup_desc;
 
-    //@JsonManagedReference
-    @OneToMany(mappedBy = "generalLookups")
-    private List<GeneralLookupsDtl> generalLookupsDtlList;
+    //ManyToOne Relations
+    @ManyToOne()
+    @JoinColumn(name = "LkIdRef")
+    private GeneralLookups generalLookups;
 
-
+    @OneToMany(mappedBy = "country")
+    private List<StationInfo> stationInfoList;
 }

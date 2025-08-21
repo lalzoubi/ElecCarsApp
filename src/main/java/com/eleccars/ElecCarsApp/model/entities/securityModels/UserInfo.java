@@ -1,7 +1,7 @@
-package com.eleccars.ElecCarsApp.model.securityModels;
+package com.eleccars.ElecCarsApp.model.entities.securityModels;
 
-import com.eleccars.ElecCarsApp.base.BaseEntity;
-import com.eleccars.ElecCarsApp.model.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.base.BaseEntity;
+import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

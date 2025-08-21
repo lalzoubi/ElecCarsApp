@@ -1,4 +1,4 @@
-package com.eleccars.ElecCarsApp.model.securityModels;
+package com.eleccars.ElecCarsApp.model.entities.securityModels;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

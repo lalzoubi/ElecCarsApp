@@ -5,13 +5,15 @@ import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
 import com.eleccars.ElecCarsApp.javautils.JavaSpringUtils;
 import com.eleccars.ElecCarsApp.javautils.RequestUtils;
 import com.eleccars.ElecCarsApp.model.mapper.securityMappers.UserInfoMapper;
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserLoginHistory;
-import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
-import com.eleccars.ElecCarsApp.service.securityServices.UserLoginHistoryService;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserLoginHistory;
+import com.eleccars.ElecCarsApp.service.securityServices.Impl.UserInfoServiceImpl;
+import com.eleccars.ElecCarsApp.service.securityServices.Impl.UserLoginHistoryServiceImpl;
 import com.eleccars.ElecCarsApp.javautils.ApiCallResponse;
+import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +24,14 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserInfoController {
 
-    @Autowired
-    UserInfoService service;
-
-    @Autowired
-    UserLoginHistoryService userLoginHistoryService;
-
-    @Autowired
-    UserInfoMapper userInfoMapper;
-
-    @Autowired
-    JavaSpringUtils JavaSpringUtils;
-
-    @Autowired
-    HttpServletRequest request;
+    final UserInfoService service;
+    final UserLoginHistoryServiceImpl userLoginHistoryServiceImpl;
+    final UserInfoMapper userInfoMapper;
+    final JavaSpringUtils JavaSpringUtils;
+    final HttpServletRequest request;
 
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody @Valid UserInfo user) {
@@ -69,7 +63,7 @@ public class UserInfoController {
                 user.setId(userInfoResponse.getId()); // set the foreign key
                 history.setUser_history(user);
                 history.setJwt_token_ref(verifyUserResponse);
-                userLoginHistoryService.saveUserLoginHistory(history);
+                userLoginHistoryServiceImpl.saveUserLoginHistory(history);
                 return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);
             } else
                 return ApiCallResponse.generateResponse(0, "خطأ في كلمة السر او كلمة المرور", "The username or password is not correct", HttpStatus.OK, null);

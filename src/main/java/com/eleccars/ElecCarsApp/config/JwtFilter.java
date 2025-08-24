@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.config;
 
-import com.eleccars.ElecCarsApp.service.securityServices.JWTService;
-import com.eleccars.ElecCarsApp.service.securityServices.MyUserDetailsService;
+import com.eleccars.ElecCarsApp.service.securityServices.Impl.JWTServiceImpl;
+import com.eleccars.ElecCarsApp.service.securityServices.Impl.MyUserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
-    JWTService jwtService;
+    JWTServiceImpl jwtServiceImpl;
 
     @Autowired
     ApplicationContext context;
@@ -43,13 +43,13 @@ public class JwtFilter extends OncePerRequestFilter {
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
                 token = authHeader.substring(7);
-                username = jwtService.extractUserNameFromToken(token);
+                username = jwtServiceImpl.extractUserNameFromToken(token);
             }
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = context.getBean(MyUserDetailsService.class).loadUserByUsername(username);
+                UserDetails userDetails = context.getBean(MyUserDetailsServiceImpl.class).loadUserByUsername(username);
 
-                if (jwtService.validateToken(token, userDetails)) {
+                if (jwtServiceImpl.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 

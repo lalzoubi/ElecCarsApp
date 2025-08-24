@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.model.mapper.stationsMappers;
 
 import com.eleccars.ElecCarsApp.model.dto.stationsDTOs.StationsInfoDto;
-import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.entities.stationsEntities.StationInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

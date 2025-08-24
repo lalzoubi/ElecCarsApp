@@ -1,6 +1,6 @@
-package com.eleccars.ElecCarsApp.model.entities.commonModels;
+package com.eleccars.ElecCarsApp.model.entities.commonEntities;
 
-import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.entities.stationsEntities.StationInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

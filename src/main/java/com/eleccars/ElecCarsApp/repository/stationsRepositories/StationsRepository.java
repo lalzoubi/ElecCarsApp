@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.repository.stationsRepositories;
 
 
-import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
+import com.eleccars.ElecCarsApp.model.entities.stationsEntities.StationInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

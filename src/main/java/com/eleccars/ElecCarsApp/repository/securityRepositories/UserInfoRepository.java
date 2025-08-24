@@ -1,6 +1,6 @@
 package com.eleccars.ElecCarsApp.repository.securityRepositories;
 
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

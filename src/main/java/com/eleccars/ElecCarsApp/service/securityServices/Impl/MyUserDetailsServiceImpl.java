@@ -1,8 +1,9 @@
-package com.eleccars.ElecCarsApp.service.securityServices;
+package com.eleccars.ElecCarsApp.service.securityServices.Impl;
 
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserPrincipal;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserPrincipal;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,11 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+@RequiredArgsConstructor
+public class MyUserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserInfoRepository repo;
-
+    final UserInfoRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

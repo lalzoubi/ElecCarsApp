@@ -1,11 +1,11 @@
 package com.eleccars.ElecCarsApp.controller.stationsControllers;
 
 
-import com.eleccars.ElecCarsApp.model.dto.stationsDTOs.StationsInfoDto;
-import com.eleccars.ElecCarsApp.model.entities.stationsModels.StationInfo;
-import com.eleccars.ElecCarsApp.service.stationsServices.StationsService;
 import com.eleccars.ElecCarsApp.javautils.ApiCallResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eleccars.ElecCarsApp.model.dto.stationsDTOs.StationsInfoDto;
+import com.eleccars.ElecCarsApp.model.entities.stationsEntities.StationInfo;
+import com.eleccars.ElecCarsApp.service.stationsServices.StationsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/stations")
+@RequiredArgsConstructor
 public class StationsController {
 
-    @Autowired
-    StationsService stationsService;
-
+    final StationsService stationsService;
 
     @PostMapping("/registerStation")
     public ResponseEntity<Object> registerStation(@RequestBody StationInfo info) {

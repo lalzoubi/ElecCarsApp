@@ -1,6 +1,6 @@
 package com.eleccars.ElecCarsApp.model.dto.securityDTOs;
 
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserRoles;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserRoles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

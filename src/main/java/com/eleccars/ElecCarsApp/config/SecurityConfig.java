@@ -1,6 +1,6 @@
 package com.eleccars.ElecCarsApp.config;
 
-import com.eleccars.ElecCarsApp.service.securityServices.MyUserDetailsService;
+import com.eleccars.ElecCarsApp.service.securityServices.Impl.MyUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig  {
 
     @Autowired
-    public MyUserDetailsService userDetailsService;
+    public MyUserDetailsServiceImpl userDetailsService;
 
     @Autowired
     JwtFilter jwtFilter;

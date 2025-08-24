@@ -1,7 +1,7 @@
 package com.eleccars.ElecCarsApp.model.mapper.securityMappers;
 
 import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
-import com.eleccars.ElecCarsApp.model.entities.securityModels.UserInfo;
+import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

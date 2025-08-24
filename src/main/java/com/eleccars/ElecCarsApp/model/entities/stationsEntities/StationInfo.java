@@ -3,6 +3,8 @@ package com.eleccars.ElecCarsApp.model.entities.stationsEntities;
 import com.eleccars.ElecCarsApp.model.base.BaseEntity;
 import com.eleccars.ElecCarsApp.model.entities.commonEntities.GeneralLookupsDtl;
 import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
+
+import com.eleccars.ElecCarsApp.model.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

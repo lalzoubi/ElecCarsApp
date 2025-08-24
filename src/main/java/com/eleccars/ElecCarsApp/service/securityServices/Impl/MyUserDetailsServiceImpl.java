@@ -4,7 +4,6 @@ import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
 import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserPrincipal;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

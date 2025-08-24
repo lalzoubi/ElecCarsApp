@@ -7,7 +7,6 @@ import com.eleccars.ElecCarsApp.model.mapper.securityMappers.UserInfoMapper;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
 import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

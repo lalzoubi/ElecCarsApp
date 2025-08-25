@@ -25,7 +25,7 @@ public class StationsController {
         return ApiCallResponse.generateResponse(1, "تم تسجيل المحطة بنجاح", "Station created successfully", HttpStatus.OK, info);
     }
 
-    @PostMapping("/updateStation")
+    @PutMapping("/updateStation")
     public ResponseEntity<Object> updateStation(@RequestBody StationsInfoDto info) {
         stationsService.updateStationDetails(info);
         return ApiCallResponse.generateResponse(1, "تم تعديل المحطة بنجاح", "Station Updated successfully", HttpStatus.OK, info);

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface StationsService {
 
-    void saveStationDetails(StationInfo stationInfo);
+    void saveStationDetails(StationsInfoDto StationsInfoDto);
+
+    void updateStationDetails(StationsInfoDto StationsInfoDto);
 
     StationsInfoDto findStationById(Long id);
 

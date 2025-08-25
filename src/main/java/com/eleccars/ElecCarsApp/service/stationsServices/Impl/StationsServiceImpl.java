@@ -25,8 +25,15 @@ public class StationsServiceImpl implements StationsService {
 
     @Transactional
     @Override
-    public void saveStationDetails(StationInfo stationInfo) {
-        stationsRepository.save(stationInfo);
+    public void saveStationDetails(StationsInfoDto StationsInfoDto) {
+        StationInfo entity = stationsMapper.toEntity(StationsInfoDto);
+        stationsRepository.save(entity);
+    }
+
+    @Override
+    public void updateStationDetails(StationsInfoDto StationsInfoDto) {
+        StationInfo entity = stationsMapper.toEntity(StationsInfoDto);
+        stationsRepository.save(entity);
     }
 
     @Transactional(readOnly = true)

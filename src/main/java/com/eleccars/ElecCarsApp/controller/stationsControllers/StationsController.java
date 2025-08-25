@@ -20,14 +20,14 @@ public class StationsController {
     final StationsService stationsService;
 
     @PostMapping("/registerStation")
-    public ResponseEntity<Object> registerStation(@RequestBody StationInfo info) {
+    public ResponseEntity<Object> registerStation(@RequestBody StationsInfoDto info) {
         stationsService.saveStationDetails(info);
         return ApiCallResponse.generateResponse(1, "تم تسجيل المحطة بنجاح", "Station created successfully", HttpStatus.OK, info);
     }
 
     @PostMapping("/updateStation")
-    public ResponseEntity<Object> updateStation(@RequestBody StationInfo info) {
-        stationsService.saveStationDetails(info);
+    public ResponseEntity<Object> updateStation(@RequestBody StationsInfoDto info) {
+        stationsService.updateStationDetails(info);
         return ApiCallResponse.generateResponse(1, "تم تعديل المحطة بنجاح", "Station Updated successfully", HttpStatus.OK, info);
     }
 

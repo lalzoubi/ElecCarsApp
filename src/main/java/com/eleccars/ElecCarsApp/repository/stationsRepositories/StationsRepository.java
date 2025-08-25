@@ -11,9 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StationsRepository extends JpaRepository<StationInfo, Long> {
 
-    //Native
-    @Query(value = "select * from station_info where id != -1" , nativeQuery = true)
-    Page<StationInfo> findAllStations(Pageable pageable);
-
-
 }

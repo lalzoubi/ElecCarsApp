@@ -50,7 +50,7 @@ public class StationsServiceImpl implements StationsService {
     public Page<StationsInfoDto> getAllStations(int pageNum, int pageSize, String sortCol, Boolean isAsc) {
 
         Pageable pageable = PageRequest.of(pageNum,pageSize, Sort.by(isAsc ? Sort.Direction.ASC : Sort.Direction.DESC, sortCol));
-        Page<StationInfo> info = stationsRepository.findAllStations(pageable);
+        Page<StationInfo> info = stationsRepository.findAll(pageable);
         return stationsMapper.toPageDto(info);
     }
 

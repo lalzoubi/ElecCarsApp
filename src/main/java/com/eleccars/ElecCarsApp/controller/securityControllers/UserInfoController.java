@@ -10,6 +10,7 @@ import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserLoginHistory
 import com.eleccars.ElecCarsApp.service.securityServices.Impl.UserLoginHistoryServiceImpl;
 import com.eleccars.ElecCarsApp.javautils.ApiCallResponse;
 import com.eleccars.ElecCarsApp.service.securityServices.UserInfoService;
+import com.eleccars.ElecCarsApp.service.securityServices.UserLoginHistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ import java.util.Optional;
 public class UserInfoController {
 
     final UserInfoService service;
-    final UserLoginHistoryServiceImpl userLoginHistoryServiceImpl;
+    final UserLoginHistoryService userLoginHistoryService;
     final UserInfoMapper userInfoMapper;
     final JavaSpringUtils JavaSpringUtils;
     final HttpServletRequest request;
@@ -61,7 +62,7 @@ public class UserInfoController {
                 user.setId(userInfoResponse.getId()); // set the foreign key
                 history.setUser_history(user);
                 history.setJwt_token_ref(verifyUserResponse);
-                userLoginHistoryServiceImpl.saveUserLoginHistory(history);
+                userLoginHistoryService.saveUserLoginHistory(history);
                 return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);
             } else
                 return ApiCallResponse.generateResponse(0, "خطأ في كلمة السر او كلمة المرور", "The username or password is not correct", HttpStatus.OK, null);

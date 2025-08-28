@@ -64,7 +64,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             String jsonResponse = "{\n" +
                     "  \"isSuccess\": 0,\n" +
-                    "  \"message_ar\": \"JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.\",\n" +
+                    "  \"message_ar\": \"ليس لديك صلاحية لإستخدام هذه ال API. يرجى تسجيل الدخول الى النظام.\",\n" +
                     "  \"message_en\": \"JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.\"\n" +
                     "}";
 

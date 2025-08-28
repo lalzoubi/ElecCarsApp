@@ -23,21 +23,10 @@ public class UserInfo extends BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotNull(message = "The username should not be null.")
-    @NotBlank(message = "The username should not be empty.")
     private String username;
-    @NotNull(message = "The password should not be null.")
-    @NotBlank(message = "The password should not be empty.")
     private String password;
-    @NotNull(message = "The email should not be null.")
-    @NotBlank(message = "The email should not be empty.")
-    @Email(message = "Please enter a valid email.")
     private String email;
-    @NotNull(message = "The first_name should not be null.")
-    @NotBlank(message = "The first_name should not be empty.")
     private String first_name;
-    @NotNull(message = "The last_name should not be null.")
-    @NotBlank(message = "The last_name should not be empty.")
     private String last_name;
     @Column(name = "is_user_confirmed")
     private Boolean userConfirmed;

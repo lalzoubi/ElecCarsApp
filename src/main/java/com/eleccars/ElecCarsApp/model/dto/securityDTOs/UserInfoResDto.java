@@ -1,6 +1,9 @@
 package com.eleccars.ElecCarsApp.model.dto.securityDTOs;
 
 import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserRoles;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserInfoDto {
+public class UserInfoResDto {
 
     private long id;
     private String username;
@@ -24,7 +27,6 @@ public class UserInfoDto {
     private String deletedBy;
     private String deletedDate;
     private long stationIdRef;
-    //    private long roleIdRef;
     private List<UserRoles> user_roles;
 
 }

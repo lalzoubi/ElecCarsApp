@@ -1,7 +1,8 @@
 package com.eleccars.ElecCarsApp.service.securityServices.Impl;
 
 import com.eleccars.ElecCarsApp.exceptionHandler.UserNotFoundException;
-import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoDto;
+import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoReqDto;
+import com.eleccars.ElecCarsApp.model.dto.securityDTOs.UserInfoResDto;
 import com.eleccars.ElecCarsApp.model.entities.securityEntities.UserInfo;
 import com.eleccars.ElecCarsApp.model.mapper.securityMappers.UserInfoMapper;
 import com.eleccars.ElecCarsApp.repository.securityRepositories.UserInfoRepository;
@@ -29,9 +30,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional
     @Override
-    public void registerUser(UserInfo user) {
+    public void registerUser(UserInfoReqDto user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        repo.save(user);
+        repo.save(userInfoMapper.toEntity(user));
     }
 
     @Override
@@ -51,45 +52,44 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional(readOnly = true)
     @Override
-    public UserInfoDto fetchUserDetails(String username) {
+    public UserInfoResDto fetchUserDetails(String username) {
         Optional<UserInfo> info = repo.findByUsername(username);
         if (info.isPresent()) {
-            return userInfoMapper.toDto(info.get());
+            return userInfoMapper.toResDto(info.get());
         } else
             throw new UserNotFoundException(0, "خطأ في اسم المستخدم او كلمة المرور", "The username or password is not correct");
     }
 
     @Transactional(readOnly = true)
     @Override
-    public UserInfo findByIsActiveTrue(String username) {
-        Optional<UserInfo> info = repo.findByUsernameAndUserActiveTrue(username);
-
-        return info.orElse(null);
+    public UserInfoResDto findByIsActiveTrue(String username) {
+        return userInfoMapper.toResDto(repo.findByUsernameAndUserActiveTrue(username).get());
     }
 
     @Transactional(readOnly = true)
     @Override
-    public UserInfo findByIsUserConfirmedTrue(String username) {
-        Optional<UserInfo> info = repo.findByUsernameAndUserConfirmedTrue(username);
-
-        return info.orElse(null);
+    public UserInfoResDto findByIsUserConfirmedTrue(String username) {
+        return userInfoMapper.toResDto(repo.findByUsernameAndUserConfirmedTrue(username).get());
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<UserInfo> findUser(String identifier) {
+    public Optional<UserInfoResDto> findUser(String identifier) {
         // إذا كان query رقم، اعتبره ID
         if (identifier.matches("\\d+")) {
-            return repo.findById(Long.parseLong(identifier));
+            Optional<UserInfo> userInfo = repo.findById(Long.parseLong(identifier));
+            return userInfo.map(userInfoMapper::toResDto);
         }
 
         // إذا يحتوي @، اعتبره Email
         if (identifier.contains("@")) {
-            return repo.findByEmail(identifier);
+            Optional<UserInfo> email = repo.findByEmail(identifier);
+            return email.map(userInfoMapper::toResDto);
         }
 
         // غير ذلك اعتبره Username
-        return repo.findByUsername(identifier);
+        Optional<UserInfo> other = repo.findByUsername(identifier);
+        return other.map(userInfoMapper::toResDto);
     }
 
 }

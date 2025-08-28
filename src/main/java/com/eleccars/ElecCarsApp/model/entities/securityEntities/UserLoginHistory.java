@@ -10,21 +10,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "user_login_history")
 public class UserLoginHistory extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String login_time;
-    private String ip_address;
-    private String device_type;
-    private String device_info;
-    private String jwt_token_ref;
+    @Column(name = "login_time")
+    private String loginTime;
+    @Column(name = "ip_address")
+    private String ipAddress;
+    @Column(name = "device_type")
+    private String deviceType;
+    @Column(name = "device_info")
+    private String deviceInfo;
+    @Column(name = "jwt_token_ref")
+    private String jwtTokenRef;
 
 
     //ManyToOne Relations
     @ManyToOne()
-    @JoinColumn(name = "userIdRef")
+    @JoinColumn(name = "user_id_ref")
     private UserInfo user_history;
 
 }

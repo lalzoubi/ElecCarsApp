@@ -18,38 +18,50 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "user_info")
 public class UserInfo extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "user_name")
     private String username;
     private String password;
     private String email;
+    @Column(name = "first_name")
     private String first_name;
+    @Column(name = "last_name")
     private String last_name;
     @Column(name = "is_user_confirmed")
     private Boolean userConfirmed;
     @Column(name = "is_user_active")
     private Boolean userActive;
+    @Column(name = "deleted_by")
     private String deletedBy;
+    @Column(name = "deleted_date")
     private String deletedDate;
 
     //ManyToOne Relations
     @ManyToOne()
-    @JoinColumn(name = "stationIdRef")
+    @JoinColumn(name = "station_id_ref")
     private StationInfo users_station;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "user_history")
+    private List<UserLoginHistory> userLoginHistoryList;
+
+    @OneToMany(mappedBy = "userInfo")
+    private List<SecUsersRoles> secUsersRoles;
+
+
+  /*  @ManyToMany
     @JoinTable(
             name = "users_roles", // اسم الجدول الوسيط
             joinColumns = @JoinColumn(name = "user_id"), // اسم العمود من جهة الطالب
             inverseJoinColumns = @JoinColumn(name = "role_id") // من جهة الكورس
     )
-    private List<UserRoles> user_roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user_history")
-    private List<UserLoginHistory> userLoginHistoryList;
+    private List<UserRoles> user_roles = new ArrayList<>();*/
+
 
 
 }

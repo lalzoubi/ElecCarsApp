@@ -53,15 +53,15 @@ public class UserInfoController {
             if (userInfoResponse != null) {
                 // insert into history table
                 UserLoginHistory history = new UserLoginHistory();
-                history.setLogin_time(JavaSpringUtils.getCurrentDate());
+                history.setLoginTime(JavaSpringUtils.getCurrentDate());
                 String clientIp = RequestUtils.getClientIp(request);
-                history.setIp_address(clientIp); // set the IP
-                history.setDevice_type(RequestUtils.getDeviceDetails(request));
-                history.setDevice_info(RequestUtils.getUserAgent(request));
+                history.setIpAddress(clientIp); // set the IP
+                history.setDeviceType(RequestUtils.getDeviceDetails(request));
+                history.setDeviceInfo(RequestUtils.getUserAgent(request));
                 UserInfo user = new UserInfo();
                 user.setId(userInfoResponse.getId()); // set the foreign key
                 history.setUser_history(user);
-                history.setJwt_token_ref(verifyUserResponse);
+                history.setJwtTokenRef(verifyUserResponse);
                 userLoginHistoryService.saveUserLoginHistory(history);
                 return ApiCallResponse.generateResponseWithToken(1, "تم استرجاع البيانات بنجاح", "The data retrieved successfully", HttpStatus.OK, userInfoResponse, verifyUserResponse);
             } else

@@ -19,27 +19,34 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Where(clause = "id != -1")
+@Table(name = "station_info")
 public class StationInfo extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String station_name_ar;
-    private String station_name_en;
-    private String station_address_desc;
+    @Column(name = "station_name_ar")
+    private String stationNameAr;
+    @Column(name = "station_name_en")
+    private String stationNameEn;
+    @Column(name = "station_address_desc")
+    private String stationAddressDesc;
     private String latitude;
     private String longitude;
     @Column(name = "is_station_active")
     private Boolean stationActive;
     @Column(name = "is_station_available")
     private Boolean stationAvailable;
-    private Integer sockets_count;
+    @Column(name = "sockets_count")
+    private Integer socketsCount;
+    @Column(name = "deleted_by")
     private String deletedBy;
+    @Column(name = "deleted_date")
     private String deletedDate;
 
     //ManyToOne Relations
     @ManyToOne()
-    @JoinColumn(name = "countryIdRef")
+    @JoinColumn(name = "country_id_ref")
     private GeneralLookupsDtl country;
 
     @OneToMany(mappedBy = "users_station")

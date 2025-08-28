@@ -1,5 +1,6 @@
 package com.eleccars.ElecCarsApp.model.entities.securityEntities;
 
+import com.eleccars.ElecCarsApp.model.entities.stationsEntities.StationInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,17 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "sec_roles")
-public class UserRoles {
+@Table(name = "sec_users_roles")
+public class SecUsersRoles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "role_name_ar")
-    private String roleNameAr;
-    @Column(name = "role_name_en")
-    private String roleNameEn;
 
-    @OneToMany(mappedBy = "userRoles")
-    private List<SecUsersRoles> secUsersRoles;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private UserInfo userInfo;
+
+    @ManyToOne()
+    @JoinColumn(name = "role_id")
+    private UserRoles userRoles;
 }
